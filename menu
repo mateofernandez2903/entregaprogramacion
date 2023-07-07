@@ -1,0 +1,73 @@
+public Menu()
+{
+InitializeComponent();
+almacenero.Enabled = false;
+camionero.Enabled = false;
+backoffice.Enabled = false;
+if (variables.registro == 2)
+{
+camionero.Enabled = true;
+}
+else if (variables.registro == 3)
+{
+almacenero.Enabled = true;
+camionero.Enabled = true;
+backoffice.Enabled = true;
+}
+else if (variables.registro == 1)
+{
+almacenero.Enabled = true;
+}}
+private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
+{}
+private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs
+e)
+{}
+private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
+{}
+private void camioneroToolStripMenuItem1_Click(object sender, EventArgs e)
+{}
+private void loginToolStripMenuItem1_Click(object sender, EventArgs e)
+{
+login frmLoginBackoffice = new login();
+this.Hide();
+frmLoginBackoffice.Show();
+}
+private void backoficeToolStripMenuItem_Click(object sender, EventArgs e)
+{}
+private void menuStrip2_ItemClicked(object sender, ToolStripItemClickedEventArgs
+e)
+{}
+private void usuarioToolStripMenuItem_Click(object sender, EventArgs e)
+{
+camioneroApp frmcamioneroApp = new camioneroApp();
+this.Hide();
+frmcamioneroApp.Show();
+}
+private void almceneroToolStripMenuItem_Click(object sender, EventArgs e)
+{
+almaceneroApp frmalmaceneroApp = new almaceneroApp();
+this.Hide();
+frmalmaceneroApp.Show();
+}
+private void backofficeToolStripMenuItem_Click(object sender, EventArgs e)
+{
+backofficeApp frmBackofficeApp = new backofficeApp();
+this.Hide();
+frmBackofficeApp.Show();
+}
+private void clienteToolStripMenuItem_Click(object sender, EventArgs e)
+{
+usuarioApp frmusuarioApp = new usuarioApp();
+this.Hide();
+frmusuarioApp.Show();
+}
+private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
+{
+Program.cn.Close();
+almacenero.Enabled = false;
+camionero.Enabled = false;
+backoffice.Enabled = false;
+MessageBox.Show("cerraste sesion, se desactivaron tus funciones ");
+}
+}
