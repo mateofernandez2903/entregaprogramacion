@@ -1,0 +1,81 @@
+static class Program
+{
+public static Menu frmMenu;
+public static ADODB.Connection cn = new ADODB.Connection();
+[STAThread]
+static void Main()
+{
+Application.EnableVisualStyles();
+Application.SetCompatibleTextRenderingDefault(false);
+Application.Run(frmMenu = new Menu());
+}
+public static void DoyPermisos(string usuario)
+{
+String sql;
+ADODB.Recordset rs;
+object filasAfectadas;
+byte rol = 0;
+frmMenu.apps.Enabled = false;
+frmMenu.almacenero.Enabled = false;
+frmMenu.camionero.Enabled = false;
+frmMenu.backoffice.Enabled = false;
+if (cn.State != 0)
+{ //conexion abierta
+sql = "select rol from usuario where usuario='" + usuario + "'";
+try
+{
+rs = cn.Execute(sql, out filasAfectadas);
+}
+catch
+{
+MessageBox.Show("Error al buscar rol del usuario, si el problema persiste,
+consulte al administrador");
+return;
+}
+if (rs.RecordCount == 0) //no encontre el rol del usuario
+{
+MessageBox.Show("no se encontro rol del usuario. comuniquese con el
+administrador");
+}
+else //ENcontramos el rol del usuario
+{
+rol = Convert.ToByte(rs.Fields[0].Value);
+switch (rol)
+{
+case 3:
+frmMenu.almacenero.Enabled = true;
+frmMenu.camionero.Enabled = true;
+frmMenu.backoffice.Enabled = true;
+MessageBox.Show("se registro como backoffice");
+backofficeApp frmbackofficeApp = new backofficeApp();
+frmMenu.Hide();
+frmbackofficeApp.Show();
+variables.registro = 3;
+break;
+case 2:
+frmMenu.camionero.Enabled = true;
+MessageBox.Show("se registro como camionero");
+camioneroApp frmcamioneroApp = new camioneroApp();
+frmMenu.Hide();
+frmcamioneroApp.Show();
+variables.registro = 2;
+break;
+case 1:
+frmMenu.almacenero.Enabled = true;
+MessageBox.Show("se registro como almacenero");
+almaceneroApp frmalmaceneroApp = new almaceneroApp();
+frmMenu.Hide();
+frmalmaceneroApp.Show();
+variables.registro = 1;
+break;
+}//switch
+}//if recordcount==0
+frmMenu.Text = "Logout";
+rs = null;
+filasAfectadas = null;
+}// CM.state != 0 }
+public static class variables
+{
+public static int registro = 0;
+}
+}
